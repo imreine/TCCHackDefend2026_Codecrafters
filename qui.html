@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfinity – Quizz</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="Perfinity_vf_claire-removebg-preview.png">
+  <style>
+    /* Quiz player overlay */
+    .quiz-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26,26,46,.6);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .quiz-overlay.open { display: flex; }
+
+    .quiz-player {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      max-width: 560px;
+      width: 100%;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .quiz-player .close-btn {
+      position: absolute;
+      top: 1rem; right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: color var(--transition);
+    }
+    .quiz-player .close-btn:hover { color: var(--primary); }
+
+    .quiz-player h2 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .quiz-progress-bar {
+      height: 5px;
+      background: var(--bg-soft);
+      border-radius: 999px;
+      margin: 1.2rem 0;
+      overflow: hidden;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 999px;
+      transition: width .4s ease;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1.4rem;
+      line-height: 1.55;
+    }
+
+    .choices { display: flex; flex-direction: column; gap: .75rem; }
+
+    .choice-btn {
+      background: var(--bg-soft);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: .85rem 1.2rem;
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: .95rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .choice-btn:hover { border-color: var(--primary); background: #f5f0ff; }
+    .choice-btn.selected { border-color: var(--primary); background: #f0e8ff; color: var(--primary); font-weight: 700; }
+    .choice-btn.correct { border-color: #16a34a; background: #dcfce7; color: #15803d; }
+    .choice-btn.wrong   { border-color: #dc2626; background: #fee2e2; color: #b91c1c; }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.8rem;
+    }
+
+    .quiz-result {
+      text-align: center;
+      padding: 1rem 0;
+    }
+    .quiz-result .score {
+      font-family: var(--font-heading);
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .quiz-result p { color: var(--text-light); margin-bottom: 1.5rem; }
+  </style>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <img src="Perfinity_vf_claire-removebg-preview2.png" alt="Perfinity" class="logo">
+      <span>Perfinity</span>
+    </div>
+    <nav>
+      <ul>
+                <li><a href="index.html"><i class="ph-bold ph-house"></i> Accueil</a></li>
+                <li><a href="cata.html"><i class="ph-bold ph-books"></i> Catalogue de cours</a></li>
+                <li><a href="qui.html" class="active"><i class="ph-bold ph-question"></i> Quizz</a></li>
+                <li><a href="tdb.html"><i class="ph-bold ph-chart-bar"></i> Tableau de bord</a></li>
+                <li><a href="inscrip.html"><i class="ph-bold ph-user-plus"></i> Inscription</a></li>
+                <li><a href="log.html"><i class="ph-bold ph-sign-in"></i> Connexion</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="quiz-header">
+      <h1>Quizz</h1>
+      <p>Envie de tester tes connaissances ? Commence le quizz !</p>
+    </div>
+
+    <div class="quiz-list">
+
+      <div class="quiz-item" onclick="startQuiz('reseaux')">
+        <div class="quiz-item-icon">🌐</div>
+        <div class="quiz-item-content">
+          <h4>Réseaux</h4>
+          <p>Architecture réseau, protocoles TCP/IP, adressage IP, modèle OSI.</p>
+          <div class="quiz-meta">
+            <span>10 questions</span>
+            <span>~5 min</span>
+            <span>Débutant</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-item" onclick="startQuiz('web')">
+        <div class="quiz-item-icon">💻</div>
+        <div class="quiz-item-content">
+          <h4>Développement Web</h4>
+          <p>HTML, CSS, JavaScript — les fondamentaux du front-end.</p>
+          <div class="quiz-meta">
+            <span>10 questions</span>
+            <span>~5 min</span>
+            <span>Intermédiaire</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-item" onclick="startQuiz('data')">
+        <div class="quiz-item-icon">📊</div>
+        <div class="quiz-item-content">
+          <h4>Data & Algorithmes</h4>
+          <p>Structures de données, complexité, algorithmes classiques.</p>
+          <div class="quiz-meta">
+            <span>10 questions</span>
+            <span>~6 min</span>
+            <span>Avancé</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-item" onclick="startQuiz('secu')">
+        <div class="quiz-item-icon">🔒</div>
+        <div class="quiz-item-content">
+          <h4>Cybersécurité</h4>
+          <p>Cryptographie, types d'attaques, bonnes pratiques de sécurité.</p>
+          <div class="quiz-meta">
+            <span>10 questions</span>
+            <span>~5 min</span>
+            <span>Intermédiaire</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-item" onclick="startQuiz('ia')">
+        <div class="quiz-item-icon">🤖</div>
+        <div class="quiz-item-content">
+          <h4>Intelligence Artificielle</h4>
+          <p>Machine learning, réseaux de neurones, concepts fondamentaux de l'IA.</p>
+          <div class="quiz-meta">
+            <span>10 questions</span>
+            <span>~6 min</span>
+            <span>Avancé</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-item" onclick="startQuiz('sql')">
+        <div class="quiz-item-icon">🗄️</div>
+        <div class="quiz-item-content">
+          <h4>SQL & Bases de données</h4>
+          <p>Requêtes SQL, jointures, normalisation, modélisation relationnelle.</p>
+          <div class="quiz-meta">
+            <span>10 questions</span>
+            <span>~5 min</span>
+            <span>Débutant</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- QUIZ PLAYER OVERLAY -->
+  <div class="quiz-overlay" id="quizOverlay">
+    <div class="quiz-player">
+      <button class="close-btn" onclick="closeQuiz()">✕</button>
+      <div id="quizContent"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><i class="ph-bold ph-copyright"></i> 2026 Perfinity. Tous droits réservés.</p>
+    <div class="rslinks">
+      <a href="https://www.tiktok.com/@immybloom26" target="_blank">
+        <img src="styles/LogoTikTok.jpg" alt="TikTok">
+      </a>
+      <a href="https://www.instagram.com/immyb_loom/" target="_blank">
+        <img src="styles/logoInsta.jpg" alt="Instagram">
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const quizData = {
+      reseaux: {
+        title: "Quizz – Réseaux",
+        questions: [
+          { q: "Combien de couches compte le modèle OSI ?", choices: ["4", "5", "7", "9"], answer: 2 },
+          { q: "Quel protocole permet d'attribuer automatiquement une adresse IP ?", choices: ["DNS", "DHCP", "HTTP", "FTP"], answer: 1 },
+          { q: "Sur quelle couche OSI fonctionne un routeur ?", choices: ["Liaison", "Réseau", "Transport", "Session"], answer: 1 },
+          { q: "Quel port utilise HTTPS par défaut ?", choices: ["80", "21", "443", "22"], answer: 2 },
+          { q: "Que signifie l'acronyme DNS ?", choices: ["Data Network System", "Domain Name System", "Digital Network Service", "Dynamic Node Server"], answer: 1 },
+        ]
+      },
+      web: {
+        title: "Quizz – Développement Web",
+        questions: [
+          { q: "Quelle balise HTML permet de créer un lien hypertexte ?", choices: ["<link>", "<a>", "<href>", "<url>"], answer: 1 },
+          { q: "Quelle propriété CSS permet de centrer un élément horizontalement avec flexbox ?", choices: ["align-items", "justify-content", "text-align", "margin: auto"], answer: 1 },
+          { q: "Quel sélecteur CSS cible tous les éléments d'une classe 'titre' ?", choices: ["#titre", ".titre", "*titre", "titre"], answer: 1 },
+          { q: "Quelle méthode JavaScript permet d'ajouter un écouteur d'événement ?", choices: ["addEvent()", "on()", "addEventListener()", "listenTo()"], answer: 2 },
+          { q: "Que retourne typeof null en JavaScript ?", choices: ["'null'", "'undefined'", "'object'", "'boolean'"], answer: 2 },
+        ]
+      },
+      data: {
+        title: "Quizz – Data & Algorithmes",
+        questions: [
+          { q: "Quelle est la complexité temporelle du tri rapide (quicksort) en moyenne ?", choices: ["O(n)", "O(n log n)", "O(n²)", "O(log n)"], answer: 1 },
+          { q: "Quelle structure de données suit le principe LIFO ?", choices: ["File (Queue)", "Pile (Stack)", "Liste chaînée", "Arbre binaire"], answer: 1 },
+          { q: "Qu'est-ce qu'un arbre binaire de recherche ?", choices: ["Un arbre dont chaque nœud a exactement 2 enfants", "Un arbre où chaque nœud gauche < nœud < nœud droit", "Un arbre équilibré", "Un arbre avec des poids sur les arêtes"], answer: 1 },
+          { q: "Quel algorithme utilise le paradigme 'diviser pour régner' ?", choices: ["Tri à bulles", "Tri par insertion", "Tri fusion", "Tri par sélection"], answer: 2 },
+          { q: "Quelle structure est adaptée à la recherche par priorité ?", choices: ["Tableau", "Pile", "File de priorité (Heap)", "Liste"], answer: 2 },
+        ]
+      },
+      secu: {
+        title: "Quizz – Cybersécurité",
+        questions: [
+          { q: "Qu'est-ce qu'une attaque de type 'phishing' ?", choices: ["Un virus informatique", "Une tentative d'usurpation d'identité par email", "Une attaque DDoS", "Un malware auto-répliquant"], answer: 1 },
+          { q: "Que signifie HTTPS ?", choices: ["HyperText Transfer Protocol Secured", "High Transfer Protocol System", "HyperText Transmission Protocol Safety", "Aucune des réponses"], answer: 0 },
+          { q: "Quel est le rôle d'un pare-feu (firewall) ?", choices: ["Chiffrer les données", "Filtrer le trafic réseau", "Détecter les virus", "Gérer les mots de passe"], answer: 1 },
+          { q: "Qu'est-ce que le chiffrement symétrique ?", choices: ["Une clé différente pour chiffrer et déchiffrer", "La même clé pour chiffrer et déchiffrer", "Un chiffrement basé sur des courbes elliptiques", "Un hachage unidirectionnel"], answer: 1 },
+          { q: "Qu'est-ce qu'une attaque DDoS ?", choices: ["Un vol de données", "Une saturation d'un serveur par de nombreuses requêtes", "Un accès non autorisé à une base de données", "Un ransomware"], answer: 1 },
+        ]
+      },
+      ia: {
+        title: "Quizz-Intelligence Artificielle",
+        questions: [
+          { q: "Qu'est-ce que le 'machine learning' ?", choices: ["Programmer des règles manuellement", "Apprendre des patterns à partir de données", "Simuler le cerveau humain exactement", "Un langage de programmation"], answer: 1 },
+          { q: "Quel type d'apprentissage utilise des données étiquetées ?", choices: ["Non supervisé", "Par renforcement", "Supervisé", "Semi-supervisé"], answer: 2 },
+          { q: "Qu'est-ce qu'un réseau de neurones convolutif (CNN) ?", choices: ["Un réseau adapté au texte", "Un réseau adapté aux images et données spatiales", "Un réseau récurrent", "Un réseau pour le traitement audio uniquement"], answer: 1 },
+          { q: "Quelle fonction est souvent utilisée pour la classification binaire en sortie ?", choices: ["ReLU", "Softmax", "Sigmoid", "Tanh"], answer: 2 },
+          { q: "Que signifie 'overfitting' (sur-apprentissage) ?", choices: ["Le modèle est trop simple", "Le modèle apprend trop bien les données d'entraînement et généralise mal", "Le modèle converge trop vite", "Le modèle ignore les outliers"], answer: 1 },
+        ]
+      },
+      sql: {
+        title: "Quizz- SQL & Bases de données",
+        questions: [
+          { q: "Quelle commande SQL permet de récupérer des données ?", choices: ["INSERT", "UPDATE", "SELECT", "DELETE"], answer: 2 },
+          { q: "Que fait la clause WHERE ?", choices: ["Trie les résultats", "Filtre les lignes selon une condition", "Joint deux tables", "Groupe les résultats"], answer: 1 },
+          { q: "Quel type de jointure retourne toutes les lignes des deux tables ?", choices: ["INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "FULL OUTER JOIN"], answer: 3 },
+          { q: "Quelle contrainte garantit l'unicité d'une colonne ?", choices: ["NOT NULL", "PRIMARY KEY", "FOREIGN KEY", "DEFAULT"], answer: 1 },
+          { q: "Quelle commande permet de regrouper des résultats ?", choices: ["ORDER BY", "HAVING", "GROUP BY", "PARTITION BY"], answer: 2 },
+        ]
+      }
+    };
+
+    let currentQuiz = null;
+    let currentQ = 0;
+    let score = 0;
+    let answered = false;
+
+    function startQuiz(key) {
+      currentQuiz = quizData[key];
+      currentQ = 0;
+      score = 0;
+      answered = false;
+      document.getElementById('quizOverlay').classList.add('open');
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = currentQuiz.questions[currentQ];
+      const total = currentQuiz.questions.length;
+      const pct = Math.round((currentQ / total) * 100);
+
+      document.getElementById('quizContent').innerHTML = `
+        <h2>${currentQuiz.title}</h2>
+        <p style="font-size:.82rem;color:var(--text-light);font-family:var(--font-ui);font-weight:600;margin-bottom:.3rem">
+          Question ${currentQ + 1} / ${total}
+        </p>
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" style="width:${pct}%"></div>
+        </div>
+        <p class="question-text">${q.q}</p>
+        <div class="choices">
+          ${q.choices.map((c, i) => `
+            <button class="choice-btn" id="choice-${i}" onclick="selectAnswer(${i})">${c}</button>
+          `).join('')}
+        </div>
+        <div class="quiz-nav">
+          <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled style="opacity:.4;cursor:not-allowed">
+            ${currentQ + 1 < total ? 'Suivant →' : 'Voir le résultat'}
+          </button>
+        </div>
+      `;
+      answered = false;
+    }
+
+    function selectAnswer(i) {
+      if (answered) return;
+      answered = true;
+      const q = currentQuiz.questions[currentQ];
+      document.querySelectorAll('.choice-btn').forEach((btn, idx) => {
+        if (idx === q.answer) btn.classList.add('correct');
+        else if (idx === i && i !== q.answer) btn.classList.add('wrong');
+      });
+      if (i === q.answer) score++;
+      const nextBtn = document.getElementById('nextBtn');
+      nextBtn.disabled = false;
+      nextBtn.style.opacity = '1';
+      nextBtn.style.cursor = 'pointer';
+    }
+
+    function nextQuestion() {
+      currentQ++;
+      if (currentQ >= currentQuiz.questions.length) {
+        showResult();
+      } else {
+        renderQuestion();
+      }
+    }
+
+    function showResult() {
+      const total = currentQuiz.questions.length;
+      const pct = Math.round((score / total) * 100);
+      let msg = pct >= 80 ? '🎉 Excellent résultat !' : pct >= 50 ? '👍 Pas mal !' : '📚 Continue à apprendre !';
+      document.getElementById('quizContent').innerHTML = `
+        <div class="quiz-result">
+          <div class="score">${score}/${total}</div>
+          <p style="font-size:1.5rem;margin-bottom:.5rem">${msg}</p>
+          <p>Tu as obtenu ${pct}% de bonnes réponses.</p>
+          <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+            <button class="btn btn-primary" onclick="startQuiz('${Object.keys(quizData).find(k => quizData[k].title === currentQuiz.title)}')">Recommencer</button>
+            <button class="btn btn-outline" onclick="closeQuiz()">Retour aux quizz</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function closeQuiz() {
+      document.getElementById('quizOverlay').classList.remove('open');
+    }
+  </script>
+
+</body>
+</html>

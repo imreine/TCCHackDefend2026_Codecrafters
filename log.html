@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfinity – Connexion</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="Perfinity_vf_claire-removebg-preview.png">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <img src="Perfinity_vf_claire-removebg-preview2.png" alt="Perfinity" class="logo">
+      <span>Perfinity</span>
+    </div>
+    <nav>
+      <ul>
+                <li><a href="index.html"><i class="ph-bold ph-house"></i> Accueil</a></li>
+                <li><a href="cata.html"><i class="ph-bold ph-books"></i> Catalogue de cours</a></li>
+                <li><a href="qui.html"><i class="ph-bold ph-question"></i> Quizz</a></li>
+                <li><a href="tdb.html"><i class="ph-bold ph-chart-bar"></i> Tableau de bord</a></li>
+                <li><a href="inscrip.html"><i class="ph-bold ph-user-plus"></i> Inscription</a></li>
+                <li><a href="log.html" class="active"><i class="ph-bold ph-sign-in"></i> Connexion</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="auth-page">
+      <div class="auth-card">
+
+        <div class="auth-logo">
+          <img src="Perfinity_vf_claire-removebg-preview.png" alt="Perfinity">
+        </div>
+        <h1 class="auth-title">Bon retour ! 👋</h1>
+        <p class="auth-subtitle">Connecte-toi pour retrouver ta progression.</p>
+
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input type="email" id="email" placeholder="exemple@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="mdp">Mot de passe</label>
+            <input type="password" id="mdp" placeholder="••••••••" required>
+          </div>
+
+          <div style="text-align:right;margin-top:-.6rem;margin-bottom:1.3rem;">
+            <a href="#" style="font-size:.85rem;color:var(--primary);font-family:var(--font-ui);font-weight:600;">
+              Mot de passe oublié ?
+            </a>
+          </div>
+
+          <div id="errorMsg" style="display:none;background:#fee2e2;color:#b91c1c;padding:.75rem 1rem;border-radius:var(--radius);font-size:.88rem;margin-bottom:1rem;font-family:var(--font-ui);font-weight:600;"></div>
+          <div id="successMsg" style="display:none;background:#dcfce7;color:#15803d;padding:.75rem 1rem;border-radius:var(--radius);font-size:.88rem;margin-bottom:1rem;font-family:var(--font-ui);font-weight:600;"></div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;font-size:1rem;padding:.85rem">
+            Se connecter
+          </button>
+        </form>
+
+        <div class="form-divider">ou</div>
+
+        <div class="auth-switch">
+          Pas encore de compte ? <a href="inscrip.html">S'inscrire</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><i class="ph-bold ph-copyright"></i> 2026 Perfinity. Tous droits réservés.</p>
+    <div class="rslinks">
+      <a href="https://www.tiktok.com/@immybloom26" target="_blank">
+        <img src="styles/LogoTikTok.jpg" alt="TikTok">
+      </a>
+      <a href="https://www.instagram.com/immyb_loom/" target="_blank">
+        <img src="styles/logoInsta.jpg" alt="Instagram">
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      const err = document.getElementById('errorMsg');
+      const ok  = document.getElementById('successMsg');
+      err.style.display = 'none';
+      ok.style.display  = 'none';
+
+      // Demo: any valid-looking credentials work
+      ok.textContent   = '✅ Connexion réussie ! Redirection…';
+      ok.style.display = 'block';
+      setTimeout(() => window.location.href = 'tdb.html', 1800);
+    }
+  </script>
+
+</body>
+</html>

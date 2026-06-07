@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfinity – Tableau de bord</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="Perfinity_vf_claire-removebg-preview.png">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <img src="Perfinity_vf_claire-removebg-preview2.png" alt="Perfinity" class="logo">
+      <span>Perfinity</span>
+    </div>
+    <nav>
+      <ul>
+                <li><a href="index.html"><i class="ph-bold ph-house"></i> Accueil</a></li>
+                <li><a href="cata.html"><i class="ph-bold ph-books"></i> Catalogue de cours</a></li>
+                <li><a href="qui.html"><i class="ph-bold ph-question"></i> Quizz</a></li>
+                <li><a href="tdb.html" class="active"><i class="ph-bold ph-chart-bar"></i> Tableau de bord</a></li>
+                <li><a href="inscrip.html"><i class="ph-bold ph-user-plus"></i> Inscription</a></li>
+                <li><a href="log.html"><i class="ph-bold ph-sign-in"></i> Connexion</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="dashboard">
+
+      <!-- WELCOME BANNER -->
+      <div class="dashboard-welcome">
+        <div>
+          <h2>Bonjour, Immy 👋</h2>
+          <p>Voici un résumé de ta progression. Continue comme ça !</p>
+        </div>
+        <a href="cata.html" class="btn btn-primary" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);backdrop-filter:blur(8px);">
+          Reprendre un cours
+        </a>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📚</div>
+          <div class="stat-value">3</div>
+          <div class="stat-label">Cours en cours</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value">1</div>
+          <div class="stat-label">Cours terminés</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🧠</div>
+          <div class="stat-value">8</div>
+          <div class="stat-label">Quizz complétés</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-value">74%</div>
+          <div class="stat-label">Score moyen</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-value">5</div>
+          <div class="stat-label">Jours consécutifs</div>
+        </div>
+      </div>
+
+      <!-- MAIN PANELS -->
+      <div class="dashboard-grid">
+
+        <!-- PROGRESSION -->
+        <div class="dashboard-panel">
+          <h3>Ma progression</h3>
+
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>🌐 Réseaux Informatiques</span>
+              <span>72%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:72%"></div>
+            </div>
+          </div>
+
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>💻 Développement Web Front-End</span>
+              <span>45%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:45%"></div>
+            </div>
+          </div>
+
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>🔒 Cybersécurité pour Débutants</span>
+              <span>30%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:30%"></div>
+            </div>
+          </div>
+
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>🗄️ SQL & Bases de données</span>
+              <span>100%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:100%"></div>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem;text-align:right">
+            <a href="cata.html" class="btn btn-outline" style="font-size:.85rem;padding:.5rem 1.3rem">
+              Voir tout le catalogue →
+            </a>
+          </div>
+        </div>
+
+        <!-- ACTIVITÉ RÉCENTE -->
+        <div class="dashboard-panel">
+          <h3>Activité récente</h3>
+
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <div class="activity-text">Quizz Réseaux complété</div>
+            <div class="activity-time">Auj.</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--accent)"></div>
+            <div class="activity-text">Cours SQL terminé ✅</div>
+            <div class="activity-time">Hier</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <div class="activity-text">Quizz Web complété</div>
+            <div class="activity-time">Il y a 2j</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <div class="activity-text">Cours Cyber démarré</div>
+            <div class="activity-time">Il y a 3j</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--accent)"></div>
+            <div class="activity-text">Inscription sur Perfinity 🎉</div>
+            <div class="activity-time">Il y a 5j</div>
+          </div>
+
+          <div style="margin-top:1.5rem">
+            <a href="qui.html" class="btn btn-primary" style="width:100%;text-align:center;font-size:.9rem">
+              Faire un quizz →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><i class="ph-bold ph-copyright"></i> 2026 Perfinity. Tous droits réservés.</p>
+    <div class="rslinks">
+      <a href="https://www.tiktok.com/@immybloom26" target="_blank">
+        <img src="styles/LogoTikTok.jpg" alt="TikTok">
+      </a>
+      <a href="https://www.instagram.com/immyb_loom/" target="_blank">
+        <img src="styles/logoInsta.jpg" alt="Instagram">
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
