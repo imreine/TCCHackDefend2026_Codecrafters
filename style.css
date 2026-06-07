@@ -1,0 +1,441 @@
+:root {
+    --color1: #000000;
+    --color2: #401268;
+    --color3: #FFFFFF;
+
+    --color2-light: rgba(64, 18, 104, 0.08);
+    --color2-glass: rgba(64, 18, 104, 0.06);
+    --color2-border: rgba(64, 18, 104, 0.15);
+    --color2-hover: rgba(64, 18, 104, 0.08);
+    --color4: #f9f5ff;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', Arial, sans-serif;
+    background-color: var(--color3);
+    color: var(--color1);
+}
+
+/* ── Header ── */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    background: rgba(237, 224, 255, 0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(64, 18, 104, 0.12);
+}
+
+/* ── Logo + Nom ── */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+header img {
+    height: 44px;
+    width: 44px;
+    object-fit: contain;
+    display: block;
+}
+
+header span {
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--color2);
+    letter-spacing: 0.5px;
+    font-family: 'Pacifico', cursive;
+    line-height: 1;
+}
+
+/* ── Nav ── */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--color2);
+    font-size: 13.5px;
+    font-weight: 500;
+    font-family: 'Quicksand', sans-serif;
+    padding: 6px 11px;
+    letter-spacing: 0.3px;
+    position: relative;
+    transition: color 0.2s;
+    background: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+nav ul li a i {
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--color2);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: calc(100% - 22px);
+}
+
+nav ul li a:hover {
+    background: none;
+    color: var(--color2);
+}
+
+/* ── Lien actif ── */
+nav ul li a.active {
+    font-weight: 700;
+    color: var(--color2);
+}
+
+/* ── Bouton Connexion ── */
+nav ul li:last-child a {
+    background: var(--color2);
+    color: var(--color3);
+    border-radius: 50px;
+    padding: 8px 20px;
+    border: none;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
+}
+
+nav ul li:last-child a:hover {
+    background: var(--color1);
+    color: var(--color3);
+    transform: scale(1.03);
+}
+
+nav ul li:last-child a::after {
+    display: none;
+}
+
+/* ── Section Hero (ben) ── */
+.ben {
+    padding: 5rem 2rem 2rem;
+    text-align: center;
+}
+
+.ben h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color2);
+    font-family: 'Pacifico', cursive;
+    margin-bottom: 0.5rem;
+}
+
+/* ── Section benvenida ── */
+.benvenida {
+    text-align: center;
+    padding: 0 2rem 4rem;
+}
+
+.benvenida h3 {
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--color2);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+}
+
+.benvenida p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 0.8rem;
+}
+
+/* ── Bouton Découvrir ── */
+.benvenida + * ,
+.cta-btn {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.benvenida a,
+.btn-main {
+    display: inline-block;
+    background: var(--color2);
+    color: var(--color3);
+    text-decoration: none;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.benvenida a:hover,
+.btn-main:hover {
+    background: var(--color1);
+    transform: scale(1.03);
+}
+
+/* ── Section articles ── */
+.last {
+    padding: 3rem 2rem;
+    background: var(--color2-light);
+}
+
+.last h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color2);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.articles {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.arti {
+    background: var(--color3);
+    border-radius: 12px;
+    border: 1px solid var(--color2-border);
+    padding: 1.2rem;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.arti:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(64, 18, 104, 0.12);
+}
+
+.arti img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.arti h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color2);
+}
+
+.arti p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.arti a {
+    align-self: flex-start;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color3);
+    background: var(--color2);
+    padding: 7px 16px;
+    border-radius: 50px;
+    transition: background 0.2s;
+}
+
+.arti a:hover {
+    background: var(--color1);
+}
+
+/* ── Section CTA ── */
+.cta {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: var(--color3);
+}
+
+.cta h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color2);
+    margin-bottom: 0.6rem;
+}
+
+.cta p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.cta button {
+    background: var(--color2);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.cta button:hover {
+    background: var(--color1);
+    transform: scale(1.03);
+}
+
+.cta button a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 32px;
+    text-decoration: none;
+    color: var(--color3);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.cta button a i {
+    font-size: 17px;
+}
+
+/* ── Footer ── */
+footer {
+    background: var(--color2);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+footer p {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+footer p i {
+    font-size: 14px;
+}
+
+.rslinks {
+    display: flex;
+    gap: 10px;
+}
+
+.rslinks img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s;
+}
+
+.rslinks img:hover {
+    transform: scale(1.1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    nav ul {
+        gap: 2px;
+    }
+
+    nav ul li a {
+        font-size: 13px;
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0.8rem 1.2rem;
+        gap: 10px;
+    }
+
+    header img {
+        height: 38px;
+        width: 38px;
+    }
+
+    header span {
+        font-size: 18px;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2px;
+    }
+
+    nav ul li a {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .benvenida h3 {
+        font-size: 26px;
+    }
+
+    .ben {
+        padding: 3rem 1rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul li a {
+        font-size: 11px;
+        padding: 4px 6px;
+    }
+
+    .benvenida h3 {
+        font-size: 20px;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
