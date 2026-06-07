@@ -1,205 +1,141 @@
 # TCCHackDefend2026_Codecrafters
-
 # Perfinity
-
 ### Apprendre sans limites
 
-Une plateforme éducative  conçue pour offrir une expérience d'apprentissage moderne, accessible et personnalisée.
+Une plateforme éducative conçue pour offrir une expérience d'apprentissage moderne, accessible et personnalisée.
+
 ---
 
 ## À propos
 
-Perfinity est une plateforme éducative nouvelle génération qui connecte apprenants, enseignants et établissements au sein d'un écosystème numérique unique.
+Perfinity est une plateforme éducative nouvelle génération qui connecte apprenants et enseignants au sein d'un écosystème numérique simple et efficace.
 
-Notre objectif est de démocratiser l'accès à une éducation de qualité grâce à des technologies modernes permettant un apprentissage interactif, flexible et centré sur les besoins de chaque utilisateur.
+Notre objectif est de démocratiser l'accès à une éducation de qualité grâce à des technologies modernes permettant un apprentissage interactif et flexible.
 
-Nous croyons que chaque individu possède un potentiel infini.
-
-C'est pourquoi nous avons créé Perfinity.
+Nous croyons que chaque individu possède un potentiel infini. C'est pourquoi nous avons créé Perfinity.
 
 ---
 
 ## Notre mission
 
-Rendre l'éducation plus accessible, plus efficace et plus engageante grâce au numérique.
-
-Perfinity accompagne les apprenants dans leur progression académique .
-
-## Fonctionnalités principales
-
-### Gestion des cours
-
-- Création de cours structurés
-- Organisation par modules 
-- Suivi de progression
-
-### Apprentissage interactif
-
-- Vidéos pédagogiques
-- Exercices pratiques
-- Quiz et évaluations
-
-### Tableau de bord
-
-- Suivi de progression
-- Statistiques d'apprentissage
-- Historique des activités
-- Recommandations personnalisées
-
-### Espace apprenant
-
-- Inscription aux cours
-- Gestion des certificats
-- Notes personnelles
-- Historique d'apprentissage
-
-### Espace enseignant
-
-- Création de contenus
-- Gestion des cours
-- Correction des évaluations
-- Suivi des performances
-
-### Administration
-
-- Gestion des utilisateurs
-- Gestion des contenus
-- Supervision de la plateforme
-- Rapports et statistiques
-
-### Certifications
-
-- Certificats numériques
-- Validation des compétences
-- Badges de réussite
+Rendre l'éducation plus accessible, plus efficace et plus engageante grâce au numérique.  
+Perfinity accompagne les apprenants dans leur progression académique.
 
 ---
 
-## Fonctionnalités prévues
+## Fonctionnalités principales
 
+### Authentification & Gestion des utilisateurs
+- Inscription et connexion sécurisée
+- Création automatique du profil utilisateur via trigger PostgreSQL
+- Gestion des rôles (étudiant par défaut)
+
+### Interface utilisateur
+- Pages d'accueil et d'authentification responsive
+- Tableau de bord basique
+- Design moderne et accessible
+
+### Gestion des cours (en cours)
+- Visualisation des cours
+- Structure modulaire (partiellement implémentée)
+
+---
+
+## Fonctionnalités prévues (non implémentées par manque de temps)
+
+- Système complet de progression et suivi des cours
+- Espace enseignant (création et gestion de contenus)
+- Quiz et évaluations interactives
+- Certificats numériques
+- Recommandations personnalisées
 - Tuteur IA intégré
-- Génération automatique de quiz
-- Parcours d'apprentissage adaptatifs
-- Application mobile Android et iOS
-- Mode hors connexion
 - Gamification
-- Classements et récompenses
-- Traduction multilingue
+- Application mobile
 
+---
 
 ## Technologies utilisées
 
 ### Frontend
+- **HTML5** : Structure sémantique
+- **CSS3** : Design responsive, animations (Flexbox, Grid, Media Queries)
+- **JavaScript (Vanilla)** : Logique client, gestion des formulaires, interactions avec Supabase
 
-- HTML
-- CSS
+### Backend & Base de données
+- **Supabase** (Backend as a Service) :
+  - **PostgreSQL** comme base de données
+  - **Supabase Auth** pour l'authentification et la gestion des sessions
+  - **Triggers PostgreSQL** pour l'auto-création des profils (`handle_new_user`)
+  - **Row Level Security (RLS)** pour la sécurité
 
-### Backend
+### Outils de développement
+- Git + GitHub
 
-- Javascript
-- PHP
+**Pourquoi ce stack ?**  
+Stack légère, moderne et gratuite idéale pour un MVP étudiant. Supabase nous permet de gérer l'authentification, la base de données et la sécurité sans serveur backend dédié.
 
-### Base de données
-
-- PostgreSQL
-
-### Authentification
-
-- OAuth 2.0
-  
-### Stockage
-
-- AWS S3
-- Cloudinary
-
-### Emails
-
-- Resend
-
-### Notifications
-
-- Firebase Cloud Messaging
-
-### DevOps
-
-- Docker
-- GitHub Actions
-- Nginx
-
-### Hébergement
-
-- Vercel
-- AWS
+---
 
 ## Architecture du projet
 
+```
 perfinity/
-│
-├── applications/
-│   ├── web/
-│   ├── api/
-│   └── administration/
-│
-├── packages/
-│   ├── ui/
-│   ├── configuration/
-│   ├── types/
-│   └── utilitaires/
-│
-├── documentation/
+├── index.html
+├── login.html
+├── register.html
+├── dashboard.html
 ├── assets/
-└── scripts/
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── supabase/
+│   └── client.js
+└── README.md
+```
+
+**Composants principaux :**
+- **Frontend** : Pages statiques + JS dynamique
+- **Supabase** : Auth + Database + Triggers
+- Synchronisation automatique entre `auth.users` et `public.utilisateurs`
+
+---
 
 ## Types d'utilisateurs
 
 ### Apprenant
-
 - Accéder aux cours
-- Réaliser les évaluations
-- Obtenir des certificats
-- Suivre sa progression
+- Suivre sa progression (à venir)
+- Gérer son profil
 
-### Administrateur
+### Administrateur / Enseignant
+- Fonctionnalités à développer
 
-- Gérer la plateforme
-- Superviser les utilisateurs
-- Produire des rapports
-- Assurer la maintenance
+---
 
 ## Sécurité
 
-La sécurité constitue une priorité pour Perfinity.
+- Authentification sécurisée via Supabase Auth (JWT)
+- Row Level Security (RLS) sur les tables
+- Triggers avec `SECURITY DEFINER`
+- Pas de stockage du mot de passe en clair dans notre table `utilisateurs`
 
-Nous appliquons notamment :
-
-- Authentification sécurisée
-- Chiffrement des données sensibles
-- Gestion des rôles et permissions
-- Protection contre les attaques courantes
-- Validation stricte des données
-- Sauvegardes régulières
+---
 
 ## Accessibilité
 
-Nous souhaitons rendre l'apprentissage accessible au plus grand nombre.
+- Design responsive
+- Structure HTML sémantique
+- Compatibilité mobile
 
-Perfinity est conçu selon une approche :
-
-- Responsive Design
-- Navigation clavier
-- Compatibilité avec les lecteurs d'écran
-- Respect des standards d'accessibilité
+---
 
 ## Contribution
 
-Les contributions sont les bienvenues.
+Les contributions sont les bienvenues. Pour toute amélioration, ouvrez une issue.
 
-Pour toute amélioration ou suggestion, veuillez ouvrir une issue avant de soumettre une modification importante.
+---
 
 ## Licence
 
-Ce projet est actuellement propriétaire.
-
-Tous droits réservés © Perfinity.
-
-</div>
+Ce projet est actuellement propriétaire.  
+Tous droits réservés © CodeCrafters - Perfinity 2026.
