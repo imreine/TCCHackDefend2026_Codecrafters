@@ -4,12 +4,12 @@
 
 ### Apprendre sans limites
 
-Une plateforme éducative  conçue pour offrir une expérience d'apprentissage moderne, accessible et personnalisée.
+Une plateforme d'apprentissage  conçue pour offrir une expérience d'apprentissage moderne, accessible et personnalisée.
 ---
 
 ## À propos
 
-Perfinity est une plateforme éducative nouvelle génération qui connecte apprenants, enseignants et établissements au sein d'un écosystème numérique unique.
+Perfinity est une plateforme d'apprentissage intelligente qui aide chaque apprenant à atteindre son plein potentiel grâce au suivi de sa progression, à l'analyse de ses performances et à la collaboration avec les enseignants et les établissements.
 
 Notre objectif est de démocratiser l'accès à une éducation de qualité grâce à des technologies modernes permettant un apprentissage interactif, flexible et centré sur les besoins de chaque utilisateur.
 
@@ -35,7 +35,6 @@ Perfinity accompagne les apprenants dans leur progression académique .
 
 ### Apprentissage interactif
 
-- Vidéos pédagogiques
 - Exercices pratiques
 - Quiz et évaluations
 
@@ -53,23 +52,9 @@ Perfinity accompagne les apprenants dans leur progression académique .
 - Notes personnelles
 - Historique d'apprentissage
 
-### Espace enseignant
-
-- Création de contenus
-- Gestion des cours
-- Correction des évaluations
-- Suivi des performances
-
-### Administration
-
-- Gestion des utilisateurs
-- Gestion des contenus
-- Supervision de la plateforme
-- Rapports et statistiques
 
 ### Certifications
 
-- Certificats numériques
 - Validation des compétences
 - Badges de réussite
 
@@ -159,12 +144,6 @@ perfinity/
 - Obtenir des certificats
 - Suivre sa progression
 
-### Administrateur
-
-- Gérer la plateforme
-- Superviser les utilisateurs
-- Produire des rapports
-- Assurer la maintenance
 
 ## Sécurité
 
